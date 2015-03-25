@@ -14,6 +14,8 @@ namespace Shel\DynamicNodes\Aspects;
 use TYPO3\Flow\AOP\JoinPointInterface;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Configuration\ConfigurationManager;
+use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
+use TYPO3\TYPO3CR\Utility;
 use Shel\DynamicNodes\Domain\Model\Category;
 use Shel\DynamicNodes\Domain\Model\DynamicField;
 
@@ -39,7 +41,7 @@ class DynamicNodesConfigurationInjectionAspect {
 	 * @Flow\Inject(setting="defaults")
 	 * @var array
 	 */
-	protected $defaultSettings;
+	protected $settings;
 
 	/**
 	 * This aspect will block loadNodeTypes from being called and will instead
@@ -55,13 +57,13 @@ class DynamicNodesConfigurationInjectionAspect {
 		$categories = $this->categoryRepository->findAll();
 		/* @var $category Category */
 		foreach ($categories as $category) {
-			$dynamicNodeName = 'Shel.DynamicNodes:' . preg_replace('/\s+/', '', ucwords($category->getLabel()));
+			$dynamicNodeName = $this->renderValidNodeTypeName($category->getLabel());
 			if (!array_key_exists($dynamicNodeName, $completeNodeTypeConfiguration)) {
 
 				$dynamicProperties = array();
 				/* @var $dynamicField DynamicField */
 				foreach ($category->getDynamicFields() as $dynamicField) {
-					$dynamicPropertyName = preg_replace('/\s+/', '', lcfirst(ucwords($dynamicField->getLabel())));
+					$dynamicPropertyName = $this->renderValidPropertyName($dynamicField->getLabel());
 					$dynamicProperties[$dynamicPropertyName] = array(
 						'type' => 'string',
 						'ui' => array(
@@ -74,19 +76,46 @@ class DynamicNodesConfigurationInjectionAspect {
 					);
 				}
 
-				$completeNodeTypeConfiguration[$dynamicNodeName] = array(
-					'superTypes' => $this->defaultSettings['superTypes'],
+				$newNodeConfiguration = array(
+					'superTypes' => $this->settings['superTypes'],
 					'abstract' => FALSE,
 					'ui' => array(
 						'label' => $category->getLabel(),
 					),
 					'properties' => $dynamicProperties
 				);
+				$completeNodeTypeConfiguration[$dynamicNodeName] = $newNodeConfiguration;
 			}
 		}
 
-		/* @var $nodeTypeManager \TYPO3\TYPO3CR\Domain\Service\NodeTypeManager */
+		/* @var $nodeTypeManager NodeTypeManager */
 		$nodeTypeManager = $joinPoint->getProxy();
 		$nodeTypeManager->overrideNodeTypes($completeNodeTypeConfiguration);
+	}
+
+	/**
+	 * Returns a camelcase version of $name with the first letter uppercase.
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	protected function renderValidName($name) {
+		return preg_replace('/\s+/', '', ucwords(str_replace('-', ' ', Utility::renderValidNodeName($name))));
+	}
+
+	/**
+	 * @param string $name
+	 * @return string
+	 */
+	protected function renderValidNodeTypeName($name) {
+		return $this->settings['nodeNamespace'] . ':' . $this->renderValidName($name);
+	}
+
+	/**
+	 * @param string $name
+	 * @return string
+	 */
+	protected function renderValidPropertyName($name) {
+		return $this->settings['propertyPrefix'] . $this->renderValidName($name);
 	}
 }

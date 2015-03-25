@@ -22,5 +22,8 @@ TYPO3:
 Shel:
   DynamicNodes:
     defaults:
+      nodeNamespace: 'Shel.DynamicNodes'
+      nodeNamePrefix: 'DynamicNode'
+      propertyPrefix: 'dynamicProperty'
       superTypes:
         - 'Shel.DynamicNodes:DynamicNode'
