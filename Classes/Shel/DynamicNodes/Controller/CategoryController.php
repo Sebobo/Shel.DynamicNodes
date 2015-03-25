@@ -72,7 +72,7 @@ class CategoryController extends ActionController {
 	}
 
 	/**
-	 * Update an asset
+	 * Update a category
 	 *
 	 * @param Category $category
 	 * @return void
@@ -92,7 +92,28 @@ class CategoryController extends ActionController {
 		$dynamicFields = $category->getDynamicFields();
 		$dynamicFields[]= new DynamicField($label, $category);
 		$this->categoryRepository->update($category);
-//		$this->dynamicFieldRepository->add(new DynamicField($label, $category));
-		$this->redirect('index'); // should be index with category
+		$this->redirect('index', 'Category', 'Shel.DynamicNodes', array('category' => $category));
+	}
+
+	/**
+	 * @param DynamicField $dynamicField
+	 * @return void
+	 */
+	public function editDynamicFieldAction(DynamicField $dynamicField) {
+		$this->view->assignMultiple(array(
+			'dynamicField' => $dynamicField,
+		));
+	}
+
+	/**
+	 * Update a dynamic field
+	 *
+	 * @param DynamicField $dynamicField
+	 * @return void
+	 */
+	public function updateDynamicFieldAction(DynamicField $dynamicField) {
+		$this->dynamicFieldRepository->update($dynamicField);
+		$this->addFlashMessage('Field has been updated.');
+		$this->redirect('edit', 'Category', 'Shel.DynamicNodes', array('category' => $dynamicField->getCategory()));
 	}
 }
