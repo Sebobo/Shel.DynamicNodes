@@ -1,0 +1,19 @@
+##
+# "DynamicNodeContent" layout
+# We clear the prototype of the dynamic node so we don't have inherited
+# properties we don't want and would be contained in the output.
+#
+prototype(Shel.DynamicNodes:DynamicNodeContent) >
+prototype(Shel.DynamicNodes:DynamicNodeContent) < prototype(TYPO3.TypoScript:Template) {
+	templatePath = 'resource://Shel.DynamicNodes/Private/Templates/Layouts/DynamicNode.html'
+	node = ${q(documentNode)}
+	dynamicProperties = ${node.properties}
+}
+
+##
+# Add a condition to render the primary content differently if we show a blog feed
+#
+prototype(PrimaryContent).DynamicNode {
+	condition = ${q(node).is('[instanceof Shel.DynamicNodes:DynamicNode]')}
+	type = 'Shel.DynamicNodes:DynamicNodeContent'
+}

@@ -1,0 +1,24 @@
+{namespace m=TYPO3\Media\ViewHelpers}
+<f:widget.paginate objects="{categories}" as="paginatedCategories" configuration="{itemsPerPage: 30, maximumNumberOfLinks: 7}">
+	<table class="neos-table category-list">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th class="neos-action"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<f:for each="{paginatedCategories}" as="category">
+				<tr class="category draggable-category" data-category-identifier="{category -> f:format.identifier()}">
+					<td>{category.label}</td>
+					<td class="neos-action">
+						<f:form action="delete" method="post" object="{category}" objectName="category">
+							<f:link.action action="edit" title="Edit category" class="neos-button neos-button-mini" arguments="{category: category}"><i class="icon-pencil"></i></f:link.action>
+							<button type="submit" title="Delete category" class="neos-button neos-button-mini neos-button-danger"><i class="icon-trash icon-white"></i></button>
+						</f:form>
+					</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
+</f:widget.paginate>

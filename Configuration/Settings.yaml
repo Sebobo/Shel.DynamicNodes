@@ -1,0 +1,26 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        'Shel.DynamicNodes': TRUE
+
+    modules:
+      management:
+        submodules:
+          category:
+            label: 'Manage dynamic nodes'
+            controller: '\Shel\DynamicNodes\Controller\CategoryController'
+            description: "This module allows to manage dynamic nodes which can be used by edtiors"
+            icon: 'icon-sitemap'
+
+    nodeTypes:
+      groups:
+        dynamicNodes:
+          position: 100
+          label: 'Dynamic nodes'
+
+Shel:
+  DynamicNodes:
+    defaults:
+      superTypes:
+        - 'Shel.DynamicNodes:DynamicNode'

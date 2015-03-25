@@ -1,0 +1,8 @@
+resources:
+  methods:
+    Shel_DynamicNodes_Controller_Category: 'method(Shel\DynamicNodes\Controller\CategoryController->.*Action())'
+
+acls:
+  Everybody:
+    methods:
+      Shel_DynamicNodes_Controller_Category: GRANT

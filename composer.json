@@ -1,0 +1,22 @@
+{
+  "name": "shel/dynamicnodes",
+  "type": "typo3-flow-package",
+  "license": "MIT",
+  "description": "Dynamic node types",
+  "require": {
+    "typo3/neos": ">=1.1"
+  },
+  "authors": [
+    {
+      "name": "Sebastian Helzle",
+      "email": "sebastian@helzle.net",
+      "homepage": "http://www.sebastianhelzle.net",
+      "role": "Developer"
+    }
+  ],
+  "autoload":{
+    "psr-0":{
+      "Shel\\DynamicNodes": "Classes"
+    }
+  }
+}

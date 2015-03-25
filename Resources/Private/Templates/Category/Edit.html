@@ -1,0 +1,28 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Category management</f:section>
+
+<f:section name="Content">
+	<div class="row t3-module-container indented">
+		<h3>
+			Editing {category.label}
+		</h3>
+
+		<br/>
+
+		<f:form action="update" object="{category}" objectName="category" id="neos-category-edit-form">
+			<f:form.textfield id="neos-tags-create-textfield" property="label" name="label" placeholder="Enter category label"/>
+			<br /><br />
+			<f:form.submit value="Update category" class="neos-button neos-button-primary" />
+		</f:form>
+
+		<br/>
+
+		<f:render partial="DynamicFieldsListView" arguments="{dynamicFields: dynamicFields}"/>
+
+		<f:form action="createDynamicField" object="{category}" objectName="category" id="neos-dynamic-field-create-form">
+			<f:form.textfield id="neos-tags-create-textfield" name="label" placeholder="Enter field label" /><br /><br />
+			<f:form.submit value="Create field" class="neos-button neos-button-primary" />
+		</f:form>
+	</div>
+</f:section>
