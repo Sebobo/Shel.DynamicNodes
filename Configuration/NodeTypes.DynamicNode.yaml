@@ -4,6 +4,7 @@
     - 'TYPO3.Neos:Document'
   ui:
     icon: 'icon-sitemap'
+    group: 'dynamicNodes'
     inspector:
       tabs:
         dynamicProperties:
