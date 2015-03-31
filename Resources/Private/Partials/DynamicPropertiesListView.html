@@ -1,0 +1,26 @@
+{namespace m=TYPO3\Media\ViewHelpers}
+<f:widget.paginate objects="{dynamicProperties}" as="paginatedDynamicProperties" configuration="{itemsPerPage: 30, maximumNumberOfLinks: 7}">
+	<table class="neos-table dynamic-property-list">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th class="neos-action"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<f:for each="{paginatedDynamicProperties}" as="dynamicProperty">
+				<tr class="dynamic-property draggable-dynamic-property" data-dynamic-property-identifier="{dynamicProperty -> f:format.identifier()}">
+					<td>{dynamicProperty.label}</td>
+					<td class="neos-action">
+						<f:form action="deleteDynamicProperty" method="post" object="{dynamicProperty}" objectName="dynamicProperty">
+							<f:link.action action="editDynamicProperty" title="Edit property" class="neos-button neos-button-mini" arguments="{dynamicProperty: dynamicProperty}"><i class="icon-pencil"></i></f:link.action>
+							<button type="submit" title="Delete property" class="neos-button neos-button-mini neos-button-danger">
+								<i class="icon-trash icon-white"></i>
+							</button>
+						</f:form>
+					</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
+</f:widget.paginate>

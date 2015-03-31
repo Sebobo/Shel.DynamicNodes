@@ -7,17 +7,17 @@ TYPO3:
     modules:
       management:
         submodules:
-          category:
-            label: 'Manage dynamic nodes'
-            controller: '\Shel\DynamicNodes\Controller\CategoryController'
-            description: "This module allows to manage dynamic nodes which can be used by edtiors"
+          dynamicNodeTypes:
+            label: 'Manage dynamic node types'
+            controller: '\Shel\DynamicNodes\Controller\DynamicNodeTypeController'
+            description: "This module allows to manage dynamic node types which can be used by edtiors"
             icon: 'icon-sitemap'
 
     nodeTypes:
       groups:
         dynamicNodes:
           position: 100
-          label: 'Dynamic nodes'
+          label: 'Dynamic node types'
 
 Shel:
   DynamicNodes:

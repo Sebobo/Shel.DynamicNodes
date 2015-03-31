@@ -1,0 +1,47 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Dynamic node types management</f:section>
+
+<f:section name="Content">
+	<div class="row t3-module-container indented">
+		<f:form action="updateDynamicProperty" object="{dynamicProperty}" objectName="dynamicProperty">
+			<div class="neos-row-fluid neos-module-container">
+				<fieldset class="neos-span9">
+					<legend>Editing property {dynamicProperty.label}</legend>
+
+					<div class="neos-row-fluid">
+						<div class="neos-span4">
+							<div class="neos-control-group">
+								<label class="neos-control-label" for="propertyLabel">Label</label>
+								<div class="neos-controls">
+									<f:form.textfield id="propertyLabel" property="label" placeholder="Enter property label" required="true" />
+								</div>
+							</div>
+						</div>
+						<div class="neos-span4">
+							<div class="neos-control-group">
+								<label class="neos-control-label" for="propertyPlaceholder">Placeholder (optional)</label>
+								<div class="neos-controls">
+									<f:form.textfield id="propertyPlaceholder" property="placeholder" placeholder="Enter placeholder" />
+								</div>
+							</div>
+						</div>
+						<div class="neos-span4">
+							<div class="neos-control-group">
+								<label class="neos-control-label" for="propertyDefaultValue">Default value (optional)</label>
+								<div class="neos-controls">
+									<f:form.textfield id="propertyDefaultValue" property="defaultValue" placeholder="Enter default value" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<f:link.action action="edit" arguments="{dynamicNodeType: dynamicProperty.dynamicNodeType}" class="neos-button">Cancel</f:link.action>
+						<f:form.submit value="Update property" class="neos-button neos-button-primary" />
+					</div>
+				</fieldset>
+			</div>
+		</f:form>
+	</div>
+</f:section>

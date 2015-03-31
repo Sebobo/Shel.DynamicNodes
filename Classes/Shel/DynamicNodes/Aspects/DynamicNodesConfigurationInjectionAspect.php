@@ -11,13 +11,14 @@ namespace Shel\DynamicNodes\Aspects;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Shel\DynamicNodes\Domain\Repository\DynamicNodeTypeRepository;
 use TYPO3\Flow\AOP\JoinPointInterface;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Configuration\ConfigurationManager;
 use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
 use TYPO3\TYPO3CR\Utility;
-use Shel\DynamicNodes\Domain\Model\Category;
-use Shel\DynamicNodes\Domain\Model\DynamicField;
+use Shel\DynamicNodes\Domain\Model\DynamicNodeType;
+use Shel\DynamicNodes\Domain\Model\DynamicProperty;
 
 /**
  * @Flow\Scope("singleton")
@@ -27,15 +28,21 @@ class DynamicNodesConfigurationInjectionAspect {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Shel\DynamicNodes\Domain\Repository\CategoryRepository
+	 * @var DynamicNodeTypeRepository
 	 */
-	protected $categoryRepository;
+	protected $dynamicNodeTypeRepository;
 
 	/**
 	 * @Flow\Inject
 	 * @var ConfigurationManager
 	 */
 	protected $configurationManager;
+
+	/**
+	 * @Flow\Inject
+	 * @var NodeTypeManager
+	 */
+	protected $nodeTypeManager;
 
 	/**
 	 * @Flow\Inject(setting="defaults")
@@ -54,23 +61,26 @@ class DynamicNodesConfigurationInjectionAspect {
 	public function addDynamicNodeConfiguration(JoinPointInterface $joinPoint) {
 		$completeNodeTypeConfiguration = $this->configurationManager->getConfiguration('NodeTypes');
 
-		$categories = $this->categoryRepository->findAll();
-		/* @var $category Category */
-		foreach ($categories as $category) {
-			$dynamicNodeName = $this->renderValidNodeTypeName($category->getLabel());
+		$dynamicNodeTypes = $this->dynamicNodeTypeRepository->findAll();
+		/* @var $dynamicNodeType DynamicNodeType */
+		foreach ($dynamicNodeTypes as $dynamicNodeType) {
+			$dynamicNodeName = $this->renderValidNodeTypeName($dynamicNodeType->getUuid());
 			if (!array_key_exists($dynamicNodeName, $completeNodeTypeConfiguration)) {
-
 				$dynamicProperties = array();
-				/* @var $dynamicField DynamicField */
-				foreach ($category->getDynamicFields() as $dynamicField) {
-					$dynamicPropertyName = $this->renderValidPropertyName($dynamicField->getLabel());
+				/* @var $dynamicProperty DynamicProperty */
+				foreach ($dynamicNodeType->getDynamicProperties() as $dynamicProperty) {
+					$dynamicPropertyName = $this->renderValidPropertyName($dynamicProperty->getUuid());
 					$dynamicProperties[$dynamicPropertyName] = array(
 						'type' => 'string',
+						'defaultValue' => $dynamicProperty->getDefaultValue(),
 						'ui' => array(
-							'label' => $dynamicField->getLabel(),
+							'label' => $dynamicProperty->getLabel(),
 							'reloadIfChanged' => TRUE,
 							'inspector' => array(
-								'group' => 'dynamicFields'
+								'group' => 'dynamicProperties',
+								'editorOptions' => array(
+									'placeholder' => $dynamicProperty->getPlaceholder()
+								)
 							)
 						)
 					);
@@ -80,7 +90,7 @@ class DynamicNodesConfigurationInjectionAspect {
 					'superTypes' => $this->settings['superTypes'],
 					'abstract' => FALSE,
 					'ui' => array(
-						'label' => $category->getLabel(),
+						'label' => $dynamicNodeType->getLabel(),
 					),
 					'properties' => $dynamicProperties
 				);
@@ -91,6 +101,17 @@ class DynamicNodesConfigurationInjectionAspect {
 		/* @var $nodeTypeManager NodeTypeManager */
 		$nodeTypeManager = $joinPoint->getProxy();
 		$nodeTypeManager->overrideNodeTypes($completeNodeTypeConfiguration);
+	}
+
+	/**
+	 * This aspect will reset the node type cache after changes to the dynamic node types
+	 *
+	 * @Flow\After("method(Shel\DynamicNodes\Controller\DynamicNodeTypeController->(update|create|delete|editProperty|createDynamicProperty|updateDynamicProperty|deleteDynamicProperty)Action())")
+	 * @param JoinPointInterface $joinPoint The current join point
+	 * @return void
+	 */
+	public function clearNodeTypeConfigurationCache(JoinPointInterface $joinPoint) {
+		$this->nodeTypeManager->overrideNodeTypes(array());
 	}
 
 	/**

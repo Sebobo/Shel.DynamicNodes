@@ -16,24 +16,15 @@ use TYPO3\Flow\Persistence\QueryInterface;
 use TYPO3\Flow\Persistence\Repository;
 
 /**
- * A repository for Categories
+ * A repository for dynamic properties
  *
  * @Flow\Scope("singleton")
  */
-class CategoryRepository extends Repository {
+class DynamicPropertyRepository extends Repository {
 
 	/**
 	 * @var array
 	 */
 	protected $defaultOrderings = array('label' => QueryInterface::ORDER_ASCENDING);
-
-	/**
-	 * @param string $searchTerm
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
-	 */
-	public function findBySearchTerm($searchTerm) {
-		$query = $this->createQuery();
-		return $query->matching($query->like('label', '%' . $searchTerm . '%'))->execute();
-	}
 
 }

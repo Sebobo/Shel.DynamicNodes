@@ -12,7 +12,7 @@
           position: 30
           icon: 'icon-sitemap'
       groups:
-        dynamicFields:
-          label: 'Dynamic fields'
+        dynamicProperties:
+          label: 'Dynamic properties'
           position: 10
           tab: dynamicProperties

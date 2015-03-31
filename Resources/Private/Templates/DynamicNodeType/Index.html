@@ -1,0 +1,31 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Dynamic node types management</f:section>
+
+<f:section name="Content">
+	<div class="row t3-module-container indented">
+		<h3>
+			Available node types
+		</h3>
+
+		<f:if condition="{dynamicNodeTypes}">
+			<f:then>
+				<f:render partial="DynamicTypesListView" arguments="{dynamicNodeTypes: dynamicNodeTypes}"/>
+			</f:then>
+			<f:else>
+				<p>No node types have been created yet.</p>
+			</f:else>
+		</f:if>
+
+		<br/>
+		<br/>
+
+		<f:form action="create">
+			<h3>Create new node type</h3>
+			<br/>
+			<f:form.textfield name="label" placeholder="Enter node type label" required="true" />
+			<br/><br/>
+			<f:form.submit value="Create node type" class="neos-button neos-button-primary" />
+		</f:form>
+	</div>
+</f:section>
