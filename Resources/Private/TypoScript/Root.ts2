@@ -7,7 +7,7 @@ prototype(Shel.DynamicNodes:DynamicNodeContent) >
 prototype(Shel.DynamicNodes:DynamicNodeContent) < prototype(TYPO3.TypoScript:Template) {
 	templatePath = 'resource://Shel.DynamicNodes/Private/Templates/Layouts/DynamicNode.html'
 	node = ${q(documentNode)}
-	dynamicProperties = ${node.properties}
+	dynamicProperties = ${q(node).dynamicProperties()}
 }
 
 ##

@@ -6,10 +6,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<f:for each="{dynamicProperties}" key="label" as="property">
+		<f:for each="{dynamicProperties}" as="property">
 			<tr>
-				<td>{label}</td>
-				<td>{property}</td>
+				<td>{property.label}</td>
+				<td>{property.value}</td>
 			</tr>
 		</f:for>
 	</tbody>
