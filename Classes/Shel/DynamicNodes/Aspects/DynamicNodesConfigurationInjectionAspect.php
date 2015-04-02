@@ -76,6 +76,10 @@ class DynamicNodesConfigurationInjectionAspect {
 						'ui' => array(
 							'label' => $dynamicProperty->getLabel(),
 							'reloadIfChanged' => TRUE,
+							'inlineEditable' => TRUE,
+							'aloha' => array(
+								'placeholder' => $dynamicProperty->getPlaceholder()
+							),
 							'inspector' => array(
 								'group' => 'dynamicProperties',
 								'editorOptions' => array(
