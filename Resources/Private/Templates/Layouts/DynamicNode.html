@@ -1,17 +1,20 @@
-<table>
-	<thead>
-		<tr>
-			<th>Label</th>
-			<th>Value</th>
-		</tr>
-	</thead>
-	<tbody>
-		<f:for each="{dynamicProperties}" as="property">
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace dn=Shel\DynamicNodes\ViewHelpers}
+	<table>
+		<thead>
 			<tr>
-				<td>{property.label}</td>
-				<td>{property.value}</td>
+				<th>Label</th>
+				<th>Value</th>
 			</tr>
-		</f:for>
-	</tbody>
-</table>
-
+		</thead>
+		<tbody>
+			<f:for each="{dynamicProperties}" key="propertyName" as="property">
+				<tr>
+					<td>{property.label}</td>
+					<td>
+						<dn:dynamicNodeType.editable property="{propertyName}" tag="span" />
+					</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
