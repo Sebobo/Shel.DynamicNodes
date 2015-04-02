@@ -7,12 +7,16 @@
 		<f:form action="updateDynamicProperty" object="{dynamicProperty}" objectName="dynamicProperty">
 			<div class="neos-row-fluid neos-module-container">
 				<fieldset class="neos-span9">
-					<legend>Editing property {dynamicProperty.label}</legend>
+					<legend>
+						<f:translate id="backend.module.properties.edit.header" arguments="{typeLabel: dynamicProperty.label}" />
+					</legend>
 
 					<div class="neos-row-fluid">
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyLabel">Label</label>
+								<label class="neos-control-label" for="propertyLabel">
+									<f:translate id="backend.module.properties.create.label" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyLabel" property="label" placeholder="Enter property label" required="true" />
 								</div>
@@ -20,7 +24,9 @@
 						</div>
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyPlaceholder">Placeholder (optional)</label>
+								<label class="neos-control-label" for="propertyPlaceholder">
+									<f:translate id="backend.module.properties.create.placeholder" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyPlaceholder" property="placeholder" placeholder="Enter placeholder" />
 								</div>
@@ -28,7 +34,9 @@
 						</div>
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyDefaultValue">Default value (optional)</label>
+								<label class="neos-control-label" for="propertyDefaultValue">
+									<f:translate id="backend.module.properties.create.default" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyDefaultValue" property="defaultValue" placeholder="Enter default value" />
 								</div>
@@ -37,7 +45,9 @@
 					</div>
 
 					<div>
-						<f:link.action action="edit" arguments="{dynamicNodeType: dynamicProperty.dynamicNodeType}" class="neos-button">Cancel</f:link.action>
+						<f:link.action action="edit" arguments="{dynamicNodeType: dynamicProperty.dynamicNodeType}" class="neos-button">
+							<f:translate id="backend.module.properties.button.cancel" />
+						</f:link.action>
 						<f:form.submit value="Update property" class="neos-button neos-button-primary" />
 					</div>
 				</fieldset>

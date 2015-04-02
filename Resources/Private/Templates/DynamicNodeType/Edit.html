@@ -7,17 +7,23 @@
 		<f:form action="update" object="{dynamicNodeType}" objectName="dynamicNodeType">
 			<div class="neos-row-fluid neos-module-container">
 				<fieldset class="neos-span3">
-					<legend>Editing {dynamicNodeType.label}</legend>
+					<legend>
+						<f:translate id="backend.module.types.edit.header" arguments="{typeLabel: dynamicNodeType.label}" />
+					</legend>
 
 					<div class="neos-control-group">
-						<label class="neos-control-label" for="nodeTypeLabel">Label</label>
+						<label class="neos-control-label" for="nodeTypeLabel">
+							<f:translate id="backend.module.types.list.header.label" />
+						</label>
 						<div class="neos-controls">
 							<f:form.textfield property="label" name="label" id="nodeTypeLabel" class="neos-span12" />
 						</div>
 					</div>
 
 					<div>
-						<f:link.action action="index" class="neos-button">Cancel</f:link.action>
+						<f:link.action action="index" class="neos-button">
+							<f:translate id="backend.module.types.button.cancel" />
+						</f:link.action>
 						<f:form.submit value="Update node type" class="neos-button neos-button-primary" />
 					</div>
 				</fieldset>
@@ -26,13 +32,13 @@
 
 		<br/>
 
-		<h3>Properties</h3>
+		<h3><f:translate id="backend.module.properties.header" /></h3>
 		<f:if condition="{dynamicProperties}">
 			<f:then>
 				<f:render partial="DynamicPropertiesListView" arguments="{dynamicProperties: dynamicProperties}"/>
 			</f:then>
 			<f:else>
-				<p>No properties have been added yet</p>
+				<p><f:translate id="backend.module.properties.empty" /></p>
 			</f:else>
 		</f:if>
 
@@ -42,12 +48,14 @@
 		<f:form action="createDynamicProperty" object="{dynamicNodeType}" objectName="dynamicNodeType">
 			<div class="neos-row-fluid neos-module-container">
 				<fieldset class="neos-span9">
-					<h3>Add new property</h3>
-
+					<h3><f:translate id="backend.module.properties.create.header" /></h3>
+					<br/>
 					<div class="neos-row-fluid">
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyLabel">Label</label>
+								<label class="neos-control-label" for="propertyLabel">
+									<f:translate id="backend.module.properties.create.label" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyLabel" name="label" placeholder="Enter property label" required="true" />
 								</div>
@@ -55,7 +63,9 @@
 						</div>
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyPlaceholder">Placeholder (optional)</label>
+								<label class="neos-control-label" for="propertyPlaceholder">
+									<f:translate id="backend.module.properties.create.placeholder" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyPlaceholder" name="placeholder" placeholder="Enter placeholder" />
 								</div>
@@ -63,7 +73,9 @@
 						</div>
 						<div class="neos-span4">
 							<div class="neos-control-group">
-								<label class="neos-control-label" for="propertyDefaultValue">Default value (optional)</label>
+								<label class="neos-control-label" for="propertyDefaultValue">
+									<f:translate id="backend.module.properties.create.default" />
+								</label>
 								<div class="neos-controls">
 									<f:form.textfield id="propertyDefaultValue" name="defaultValue" placeholder="Enter default value" />
 								</div>
@@ -72,7 +84,7 @@
 					</div>
 
 					<div>
-						<f:form.submit value="Add property" class="neos-button neos-button-primary" />
+						<f:form.submit value="{f:translate(id: 'backend.module.properties.button.create')}" class="neos-button neos-button-primary" />
 					</div>
 				</fieldset>
 			</div>

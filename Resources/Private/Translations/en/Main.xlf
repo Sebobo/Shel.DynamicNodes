@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product="Shel.DynamicNodes" source-language="en" datatype="plaintext" target-language="en">
+		<body>
+			<trans-unit id="backend.module.title">
+				<source>Dynamic node types management</source>
+			</trans-unit>
+			<trans-unit id="backend.module.index.header">
+				<source>Available node types</source>
+			</trans-unit>
+			<trans-unit id="backend.module.index.empty">
+				<source>No node types have been created yet.</source>
+			</trans-unit>
+			<trans-unit id="backend.module.index.create">
+				<source>Create new node type</source>
+			</trans-unit>
+
+			<trans-unit id="backend.module.nodetype.button.create">
+				<source>Create node type</source>
+			</trans-unit>
+			<trans-unit id="backend.module.nodetype.placeholder.label">
+				<source>Enter node type label</source>
+			</trans-unit>
+
+			<trans-unit id="backend.module.types.list.header.label">
+				<source>Label</source>
+			</trans-unit>
+			<trans-unit id="backend.module.types.list.header.actions">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="backend.module.types.edit.header">
+				<source>Editing "{typeLabel}"</source>
+			</trans-unit>
+			<trans-unit id="backend.module.types.button.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+
+			<trans-unit id="backend.module.properties.edit.header">
+				<source>Editing property "{typeLabel}"</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.header">
+				<source>Properties</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.empty">
+				<source>No properties have been added yet</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.create.label">
+				<source>Label</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.create.placeholder">
+				<source>Placeholder (optional)</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.create.default">
+				<source>Default value (optional)</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.create.header">
+				<source>Add new property</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.button.create">
+				<source>Add property</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.list.header.label">
+				<source>Label</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.list.header.actions">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="backend.module.properties.button.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

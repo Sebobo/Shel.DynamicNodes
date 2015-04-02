@@ -1,11 +1,13 @@
 <f:layout name="Default" />
 
-<f:section name="Title">Dynamic node types management</f:section>
+<f:section name="Title">
+	<f:translate id="backend.module.title" />
+</f:section>
 
 <f:section name="Content">
 	<div class="row t3-module-container indented">
 		<h3>
-			Available node types
+			<f:translate id="backend.module.index.header" />
 		</h3>
 
 		<f:if condition="{dynamicNodeTypes}">
@@ -13,7 +15,7 @@
 				<f:render partial="DynamicTypesListView" arguments="{dynamicNodeTypes: dynamicNodeTypes}"/>
 			</f:then>
 			<f:else>
-				<p>No node types have been created yet.</p>
+				<p><f:translate id="backend.module.index.empty" /></p>
 			</f:else>
 		</f:if>
 
@@ -21,11 +23,11 @@
 		<br/>
 
 		<f:form action="create">
-			<h3>Create new node type</h3>
+			<h3><f:translate id="backend.module.index.create" /></h3>
 			<br/>
-			<f:form.textfield name="label" placeholder="Enter node type label" required="true" />
+			<f:form.textfield name="label" placeholder="{f:translate(id: 'backend.module.nodetype.placeholder.label')}" required="true" />
 			<br/><br/>
-			<f:form.submit value="Create node type" class="neos-button neos-button-primary" />
+			<f:form.submit value="{f:translate(id: 'backend.module.nodetype.button.create')}" class="neos-button neos-button-primary" />
 		</f:form>
 	</div>
 </f:section>
