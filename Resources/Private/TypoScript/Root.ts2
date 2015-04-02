@@ -4,9 +4,8 @@
 # properties we don't want and would be contained in the output.
 #
 prototype(Shel.DynamicNodes:DynamicNodeContent) >
-prototype(Shel.DynamicNodes:DynamicNodeContent) < prototype(TYPO3.TypoScript:Template) {
+prototype(Shel.DynamicNodes:DynamicNodeContent) < prototype(Content) {
 	templatePath = 'resource://Shel.DynamicNodes/Private/Templates/Layouts/DynamicNode.html'
-	node = ${q(documentNode)}
 	dynamicProperties = ${q(node).dynamicProperties()}
 }
 
