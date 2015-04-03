@@ -65,9 +65,10 @@ class DynamicPropertiesOperation extends AbstractOperation {
 		$dynamicPropertyPrefix = $this->settings['propertyPrefix'];
 		$propertyConfiguration = $element->getNodeType()->getProperties();
 
-		// Retrieve human readable label for each dynamic property from the properties configuration
+		// Retrieve human readable label for each dynamic property from the properties configuration.
+		// Don't show properties which don't exist anymore in the node types configuration.
 		foreach ($properties as $propertyName => $value) {
-			if (strpos($propertyName, $dynamicPropertyPrefix) === 0) {
+			if (strpos($propertyName, $dynamicPropertyPrefix) === 0 && array_key_exists($propertyName, $propertyConfiguration)) {
 				$output[$propertyName] = array(
 					'label' => $propertyConfiguration[$propertyName]['ui']['label'],
 					'value' => $value,
