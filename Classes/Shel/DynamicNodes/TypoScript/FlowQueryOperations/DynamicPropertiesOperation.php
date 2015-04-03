@@ -67,11 +67,11 @@ class DynamicPropertiesOperation extends AbstractOperation {
 
 		// Retrieve human readable label for each dynamic property from the properties configuration.
 		// Don't show properties which don't exist anymore in the node types configuration.
-		foreach ($properties as $propertyName => $value) {
-			if (strpos($propertyName, $dynamicPropertyPrefix) === 0 && array_key_exists($propertyName, $propertyConfiguration)) {
+		foreach ($propertyConfiguration as $propertyName => $propertyConfig) {
+			if (strpos($propertyName, $dynamicPropertyPrefix) === 0) {
 				$output[$propertyName] = array(
-					'label' => $propertyConfiguration[$propertyName]['ui']['label'],
-					'value' => $value,
+					'label' => $propertyConfig['ui']['label'],
+					'value' => array_key_exists($propertyName, $properties) ? $properties[$propertyName] : $propertyConfig['defaultValue'],
 				);
 			}
 		}

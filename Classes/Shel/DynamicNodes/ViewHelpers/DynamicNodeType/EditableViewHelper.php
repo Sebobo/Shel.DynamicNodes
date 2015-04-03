@@ -44,13 +44,15 @@ class EditableViewHelper extends \TYPO3\Neos\ViewHelpers\ContentElement\Editable
 			$node = $this->getNodeFromTypoScriptContext();
 		}
 
+		$propertyConfiguration = $node->getNodeType()->getProperties();
 		$properties = ObjectAccess::getPropertyPath($node, 'properties');
 		$dynamicPropertyPrefix = $this->settings['propertyPrefix'];
 
 		// Add dynamic properties to context which are missing
 		$addedProperties = array();
-		foreach ($properties as $propertyName => $value) {
+		foreach ($propertyConfiguration as $propertyName => $propertyConfig) {
 			if (strpos($propertyName, $dynamicPropertyPrefix) === 0 && !$this->templateVariableContainer->exists($propertyName)) {
+				$value = array_key_exists($propertyName, $properties) ? $properties[$propertyName] : $propertyConfig['defaultValue'];
 				$this->templateVariableContainer->add($propertyName, $value);
 				$addedProperties[]= $propertyName;
 			}
