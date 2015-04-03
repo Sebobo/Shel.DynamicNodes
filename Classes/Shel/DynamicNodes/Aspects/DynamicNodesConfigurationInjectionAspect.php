@@ -14,6 +14,7 @@ namespace Shel\DynamicNodes\Aspects;
 use Shel\DynamicNodes\Domain\Repository\DynamicNodeTypeRepository;
 use TYPO3\Flow\AOP\JoinPointInterface;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Cache\CacheManager;
 use TYPO3\Flow\Configuration\ConfigurationManager;
 use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
 use TYPO3\TYPO3CR\Utility;
@@ -49,6 +50,12 @@ class DynamicNodesConfigurationInjectionAspect {
 	 * @var array
 	 */
 	protected $settings;
+
+	/**
+	 * @var CacheManager
+	 * @Flow\Inject
+	 */
+	protected $cacheManager;
 
 	/**
 	 * This aspect will block loadNodeTypes from being called and will instead
@@ -115,7 +122,14 @@ class DynamicNodesConfigurationInjectionAspect {
 	 * @return void
 	 */
 	public function clearNodeTypeConfigurationCache(JoinPointInterface $joinPoint) {
+		// Flush note type configuration cache
 		$this->nodeTypeManager->overrideNodeTypes(array());
+
+		// Flush configuration version cache to force reload the node type schema
+		$this->cacheManager->getCache('TYPO3_Neos_Configuration_Version')->flush();
+
+		// Flush content cache so changed dynamic nodes are updated
+		$this->cacheManager->getCache('TYPO3_TypoScript_Content')->flush();
 	}
 
 	/**
