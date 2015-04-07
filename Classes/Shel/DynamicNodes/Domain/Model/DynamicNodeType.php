@@ -3,6 +3,7 @@ namespace Shel\DynamicNodes\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Shel\DynamicNodes\Utility;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Utility\Algorithms;
 
@@ -87,5 +88,15 @@ class DynamicNodeType {
 	 */
 	public function getUuid() {
 		return $this->uuid;
+	}
+
+	/**
+	 * Creates a valid unique node type name which can be used in the node types configuration
+	 *
+	 * @param string $namespace
+	 * @return string
+	 */
+	public function getValidNodeTypeName($namespace) {
+		return $namespace . ':' . Utility::renderValidName($this->uuid);
 	}
 }

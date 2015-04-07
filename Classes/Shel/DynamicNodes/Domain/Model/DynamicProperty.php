@@ -2,6 +2,7 @@
 namespace Shel\DynamicNodes\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shel\DynamicNodes\Utility;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Utility\Algorithms;
 
@@ -123,5 +124,15 @@ class DynamicProperty {
 	 */
 	public function setDefaultValue($defaultValue) {
 		$this->defaultValue = $defaultValue;
+	}
+
+	/**
+	 * Creates a valid unique property name which can be used in the node types configuration
+	 *
+	 * @param string $prefix
+	 * @return string
+	 */
+	public function getValidPropertyName($prefix) {
+		return $prefix . Utility::renderValidName($this->uuid);
 	}
 }

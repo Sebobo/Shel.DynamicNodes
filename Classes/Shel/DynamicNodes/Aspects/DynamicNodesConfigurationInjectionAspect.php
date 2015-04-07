@@ -71,12 +71,13 @@ class DynamicNodesConfigurationInjectionAspect {
 		$dynamicNodeTypes = $this->dynamicNodeTypeRepository->findAll();
 		/* @var $dynamicNodeType DynamicNodeType */
 		foreach ($dynamicNodeTypes as $dynamicNodeType) {
-			$dynamicNodeName = $this->renderValidNodeTypeName($dynamicNodeType->getUuid());
+			$dynamicNodeName = $dynamicNodeType->getValidNodeTypeName($this->settings['nodeNamespace']);
+
 			if (!array_key_exists($dynamicNodeName, $completeNodeTypeConfiguration)) {
 				$dynamicProperties = array();
 				/* @var $dynamicProperty DynamicProperty */
 				foreach ($dynamicNodeType->getDynamicProperties() as $dynamicProperty) {
-					$dynamicPropertyName = $this->renderValidPropertyName($dynamicProperty->getUuid());
+					$dynamicPropertyName = $dynamicProperty->getValidPropertyName($this->settings['propertyPrefix']);
 					$dynamicProperties[$dynamicPropertyName] = array(
 						'type' => 'string',
 						'defaultValue' => $dynamicProperty->getDefaultValue(),
@@ -130,31 +131,5 @@ class DynamicNodesConfigurationInjectionAspect {
 
 		// Flush content cache so changed dynamic nodes are updated
 		$this->cacheManager->getCache('TYPO3_TypoScript_Content')->flush();
-	}
-
-	/**
-	 * Returns a camelcase version of $name with the first letter uppercase.
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	protected function renderValidName($name) {
-		return preg_replace('/\s+/', '', ucwords(str_replace('-', ' ', Utility::renderValidNodeName($name))));
-	}
-
-	/**
-	 * @param string $name
-	 * @return string
-	 */
-	protected function renderValidNodeTypeName($name) {
-		return $this->settings['nodeNamespace'] . ':' . $this->renderValidName($name);
-	}
-
-	/**
-	 * @param string $name
-	 * @return string
-	 */
-	protected function renderValidPropertyName($name) {
-		return $this->settings['propertyPrefix'] . $this->renderValidName($name);
 	}
 }
