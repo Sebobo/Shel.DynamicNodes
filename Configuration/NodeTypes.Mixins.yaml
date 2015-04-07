@@ -1,0 +1,24 @@
+'Shel.DynamicNodes:DynamicNodeTypeSelectorMixin':
+  abstract: TRUE
+  ui:
+    inspector:
+      groups:
+        dynamicNodes:
+          label: 'Dynamic nodes'
+          position: 10
+  properties:
+    selectedNodeTypes:
+      type: 'array'
+      ui:
+        label: 'Dynamic node types'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'dynamicNodes'
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              '':
+                label: 'Select one or more'
+  postprocessors:
+    'DynamicNodeTypeSelectorPostprocessor':
+      postprocessor: 'Shel\DynamicNodes\NodeTypePostprocessor\DynamicNodeTypeSelectorPostprocessor'
