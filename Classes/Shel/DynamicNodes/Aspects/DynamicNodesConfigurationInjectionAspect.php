@@ -103,9 +103,15 @@ class DynamicNodesConfigurationInjectionAspect {
 					'abstract' => FALSE,
 					'ui' => array(
 						'label' => $dynamicNodeType->getLabel(),
-					),
-					'properties' => $dynamicProperties
+					)
 				);
+
+				// Only set properties if there are any.
+				// If properties is set to an empty array a bug in Neos will break the node configuration.
+				// This leads to an empty inspector and strange error messages.
+				if (count($dynamicProperties)) {
+					$newNodeConfiguration['properties'] = $dynamicProperties;
+				}
 				$completeNodeTypeConfiguration[$dynamicNodeName] = $newNodeConfiguration;
 			}
 		}
