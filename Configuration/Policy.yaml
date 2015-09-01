@@ -1,8 +1,11 @@
-resources:
-  methods:
-    Shel_DynamicNodes_Controller_DynamicNodeType: 'method(Shel\DynamicNodes\Controller\DynamicNodeTypeController->.*Action())'
+privilegeTargets:
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Shel_DynamicNodes_Controller_DynamicNodeType':
+      matcher: 'method(Shel\DynamicNodes\Controller\DynamicNodeTypeController->.*Action())'
 
-acls:
-  Everybody:
-    methods:
-      Shel_DynamicNodes_Controller_DynamicNodeType: GRANT
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Shel_DynamicNodes_Controller_DynamicNodeType'
+        permission: GRANT
