@@ -1,7 +1,7 @@
 'Shel.DynamicNodes:DynamicNode':
   abstract: TRUE
   superTypes:
-    - 'TYPO3.Neos:Document'
+    'TYPO3.Neos:Document': true
   ui:
     icon: 'icon-sitemap'
     group: 'dynamicNodes'
