@@ -12,7 +12,7 @@ namespace Shel\DynamicNodes\Aspects;
  *                                                                        */
 
 use Shel\DynamicNodes\Domain\Repository\DynamicNodeTypeRepository;
-use TYPO3\Flow\AOP\JoinPointInterface;
+use TYPO3\Flow\Aop\JoinPointInterface;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Cache\CacheManager;
 use TYPO3\Flow\Configuration\ConfigurationManager;
