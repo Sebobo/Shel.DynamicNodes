@@ -1,16 +1,17 @@
+
 'Shel.DynamicNodes:DynamicNode':
-  abstract: TRUE
+  abstract: true
   superTypes:
-    - 'TYPO3.Neos:Document'
+    'TYPO3.Neos:Document': true
   ui:
-    icon: 'icon-sitemap'
-    group: 'dynamicNodes'
+    icon: icon-sitemap
+    group: dynamicNodes
     inspector:
       tabs:
         dynamicProperties:
           label: 'Dynamic properties'
           position: 30
-          icon: 'icon-sitemap'
+          icon: icon-sitemap
       groups:
         dynamicProperties:
           label: 'Dynamic properties'
