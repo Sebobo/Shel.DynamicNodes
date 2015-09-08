@@ -35,7 +35,7 @@ Add the following to your `Settings.yaml` and adapt to your needs:
       DynamicNodes:
         defaults:
           superTypes:
-            - 'Vendor.Package:DynamicNodeSuperType'
+            'Vendor.Package:DynamicNodeSuperType': true
   
 ### Change labels & translate
 
