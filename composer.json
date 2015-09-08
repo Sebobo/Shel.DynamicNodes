@@ -4,7 +4,7 @@
     "license": "MIT",
     "description": "Dynamic node types",
     "require": {
-        "typo3/neos": ">=1.1"
+        "typo3/neos": "2.0.*"
     },
     "authors": [
         {
