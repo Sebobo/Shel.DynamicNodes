@@ -1,6 +1,6 @@
-# Dynamic node type manager for TYPO3 Neos
+# Dynamic node type manager for Neos CMS
 
-This package allows you to setup dynamic node types via a backend module in TYPO3 Neos.
+This package allows you to setup dynamic node types via a backend module in Neos CMS.
 
 ## Installation
 
@@ -10,6 +10,11 @@ Install `shel/dynamicnodes` with composer:
 
 A separate branch for Neos 1.2.* and Neos 2.0.* support exists.
 Composer should automatically select the right one.
+
+## Try it
+
+Use our [DynamicNodes Neos distribution](https://github.com/Sebobo/ShelDynamicNodesDistribution) to quickly create
+a project which contains the package. It is used for further development.
 
 ## Configuration
 
@@ -51,7 +56,7 @@ or completely change the behaviour.
 
 ## Usage
  
-In the TYPO3 Neos backend go to the modules list and click on `Manage dynamic node types`.
+In the Neos CMS backend go to the modules list and click on `Manage dynamic node types`.
 There you can add new nodes and add properties to them.
 After each change the node cache is flushed and the changes are effective immediately.
 You can use the created node types by adding new documents in the page tree.
