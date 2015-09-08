@@ -4,7 +4,12 @@ This package allows you to setup dynamic node types via a backend module in TYPO
 
 ## Installation
 
-Install `shel/dynamicnodes` with composer by adding it to your site package or another package.
+Install `shel/dynamicnodes` with composer:
+
+    composer require shel/dynamicnodes
+
+A separate branch for Neos 1.2.* and Neos 2.0.* support exists.
+Composer should automatically select the right one.
 
 ## Configuration
 
@@ -62,6 +67,8 @@ label won't collide.
 * Sorting of fields
 * Customizeable icons for nodes
 * Warning when deleting nodes which are in use
+* Import & Export of dynamic node types
+* Customizable configuration prototype for dynamic properties
 
 ## Related topics:
 
